@@ -1,0 +1,76 @@
+# -------------------------
+# 1️⃣ Install Terraform
+# -------------------------
+sudo dnf install -y yum-utils
+sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+sudo dnf -y install terraform
+terraform -version
+
+# -------------------------
+# 2️⃣ Install Ansible
+# -------------------------
+sudo dnf install ansible -y
+ansible --version
+
+# -------------------------
+# 3️⃣ Install Docker
+# -------------------------
+sudo dnf install docker -y
+sudo systemctl start docker
+sudo systemctl enable docker
+docker --version
+
+# -------------------------
+# 4️⃣ Install Kubernetes CLI
+# -------------------------
+curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+chmod +x kubectl
+sudo mv kubectl /usr/local/bin/
+kubectl version --client
+
+# -------------------------
+# 5️⃣ Start Minikube Cluster
+# -------------------------
+minikube start
+
+# -------------------------
+# 6️⃣ Create Docker Image
+# -------------------------
+mkdir devops-project
+cd devops-project
+
+cat <<EOF > Dockerfile
+FROM nginx
+COPY . /usr/share/nginx/html
+EOF
+
+docker build -t devops-app:v1 .
+
+docker run -d -p 8080:80 --name devops-container devops-app:v1
+
+# -------------------------
+# 7️⃣ Deploy to Kubernetes
+# -------------------------
+kubectl create deployment devops-app --image=devops-app:v1
+kubectl expose deployment devops-app --type=NodePort --port=80
+
+kubectl get pods
+kubectl get svc
+
+minikube service devops-app
+
+
+Full DevOps Architecture
+Developer
+   ↓
+Git Repository
+   ↓
+Jenkins CI/CD Pipeline
+   ↓
+Terraform (Create Infrastructure)
+   ↓
+Ansible (Configure Servers)
+   ↓
+Docker (Containerize App)
+   ↓
+Kubernetes (Deploy Containers)
