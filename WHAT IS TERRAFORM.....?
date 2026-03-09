@@ -1,0 +1,124 @@
+## What is Terraform?
+
+**Terraform** is an **Infrastructure as Code (IaC)** tool developed by **HashiCorp**.
+It is used to **create, manage, and automate cloud infrastructure** using code.
+
+Instead of manually creating servers, networks, and databases in cloud consoles, you write **configuration files**, and Terraform automatically builds them.
+
+---
+
+# Simple Definition (Interview Answer)
+
+**Terraform is an Infrastructure as Code tool used to provision and manage cloud infrastructure automatically using configuration files.**
+
+---
+
+# Real-World Example
+
+Suppose you want to create an EC2 server in **Amazon Web Services**.
+
+Without Terraform:
+
+1. Login to AWS console
+2. Click EC2
+3. Launch instance
+4. Configure settings manually
+
+With Terraform:
+You write a **.tf file**, and Terraform creates the server automatically.
+
+---
+
+# Example Terraform Code (Create EC2)
+
+```hcl
+provider "aws" {
+  region = "us-east-1"
+}
+
+resource "aws_instance" "myserver" {
+  ami           = "ami-123456789"
+  instance_type = "t2.micro"
+}
+```
+
+---
+
+# Commands Used in Terraform
+
+```bash
+terraform init
+terraform plan
+terraform apply
+terraform destroy
+```
+
+### Meaning
+
+| Command             | Purpose                          |
+| ------------------- | -------------------------------- |
+| `terraform init`    | Initialize Terraform project     |
+| `terraform plan`    | Shows what Terraform will create |
+| `terraform apply`   | Creates infrastructure           |
+| `terraform destroy` | Deletes infrastructure           |
+
+---
+
+# Terraform Workflow (DevOps Flow)
+
+1️⃣ Write configuration file
+2️⃣ Run `terraform init`
+3️⃣ Run `terraform plan`
+4️⃣ Run `terraform apply`
+5️⃣ Infrastructure created automatically
+
+---
+
+# Advantages of Terraform
+
+✔ Infrastructure automation
+✔ Multi-cloud support
+✔ Version control for infrastructure
+✔ Faster deployment
+✔ Reusable modules
+
+---
+
+# Interview Questions & Answers
+
+### 1️⃣ What is Terraform?
+
+Terraform is an Infrastructure as Code tool used to automate the provisioning and management of cloud resources.
+
+---
+
+### 2️⃣ What is IaC?
+
+IaC means managing infrastructure using code instead of manual configuration.
+
+---
+
+### 3️⃣ What are Terraform configuration files?
+
+They are **.tf files** written in **HCL (HashiCorp Configuration Language)**.
+
+---
+
+### 4️⃣ What is Terraform State?
+
+Terraform state is a file that stores the current infrastructure information.
+
+---
+
+### 5️⃣ What is Terraform Provider?
+
+A provider is a plugin that allows Terraform to interact with cloud platforms like AWS, Azure, or GCP.
+
+---
+
+# Simple One-Line Interview Answer
+
+**Terraform is an Infrastructure as Code tool used to automate the creation and management of cloud resources using configuration files.**
+
+---
+
